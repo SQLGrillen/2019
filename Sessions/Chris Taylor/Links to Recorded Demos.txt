@@ -1,0 +1,10 @@
+
+
+1 - CI/CD with Containers and Azure DevOps - 1 Build Pipeline Demo
+	https://www.youtube.com/watch?v=lLZJnYyFu74
+2 - CI/CD with Containers and Azure DevOps - 2 Pull and Run Image Locally
+	https://www.youtube.com/watch?v=X2i6HuHTkEY
+3 - CI/CD with Containers and Azure DevOps - 3 Release Pipeline Demo
+	https://www.youtube.com/watch?v=Vqb63EzojuA
+4 - CI/CD with Containers and Azure DevOps - 4 Kubernetes Tour
+	https://www.youtube.com/watch?v=rTzniTHUDxE
