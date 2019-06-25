@@ -39,7 +39,7 @@ def fit_model():
   # Start a new MLflow run
   with mlflow.start_run() as run:
     # Fit the model, performing cross validation to improve accuracy
-    paramGrid = ParamGridBuilder().addGrid(hashingTF.numFeatures, [1000, 2000]).build()
+    paramGrid = ParamGridBuilder().addGrid(hashingTF.numFeatures, [250,500,1000, 2000]).build()
     cv = CrossValidator(estimator=pipeline, evaluator=MulticlassClassificationEvaluator(), estimatorParamMaps=paramGrid)
     cvModel = cv.fit(df)
     model = cvModel.bestModel
@@ -50,6 +50,22 @@ def fit_model():
 # COMMAND ----------
 
 fit_model()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC 
+# MAGIC ## MLFlow overview
+# MAGIC 
+# MAGIC Each MLFlow run contains the following properties
+# MAGIC 
+# MAGIC - Source: Name of the notebook we used
+# MAGIC - Version: Notebook revision if run from a notebook or Git commit hash.
+# MAGIC - Start & end time: Start and end time of the run.
+# MAGIC - Parameters: Key-value model parameters. Both keys and values are strings.
+# MAGIC - Tags: Key-value run metadata that can be updated during and after a run completes. Both keys and values are strings.
+# MAGIC - Metrics: Key-value model evaluation metrics.
+# MAGIC - Artifacts: Output files for our project
 
 # COMMAND ----------
 

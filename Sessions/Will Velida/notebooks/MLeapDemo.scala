@@ -49,6 +49,17 @@ df.printSchema()
 
 // COMMAND ----------
 
+// MAGIC %md
+// MAGIC 
+// MAGIC ### Pipelines
+// MAGIC 
+// MAGIC - Here, we're setting up our Pipeline for our model
+// MAGIC - Basically consists of stages (either a transformer or estimator)
+// MAGIC - These are run in order, transforming the input DataFrame as it passes through each stage
+
+// COMMAND ----------
+
+// get a number of indicies for our topic column 
 val labelIndexer = new StringIndexer()
   .setInputCol("topic")
   .setOutputCol("label")
@@ -56,20 +67,16 @@ val labelIndexer = new StringIndexer()
 
 // COMMAND ----------
 
+// Break into individual words
 val tokenizer = new Tokenizer().setInputCol("text").setOutputCol("words")
+// put them into fixed length feature vectors
 val hashingTF = new HashingTF().setInputCol("words").setOutputCol("features")
 
 // COMMAND ----------
 
-// MAGIC %md
-// MAGIC 
-// MAGIC ### Pipelines
-// MAGIC 
-// MAGIC - Here, we're setting up our Pipeline for our model
-
-// COMMAND ----------
-
+// Create a new DecisionTreeClassifier
 val dt = new DecisionTreeClassifier()
+// Set up our pipeline
 val pipeline = new Pipeline()
   .setStages(Array(labelIndexer, tokenizer, hashingTF, dt))
 

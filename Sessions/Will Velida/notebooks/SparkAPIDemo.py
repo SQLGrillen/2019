@@ -7,6 +7,13 @@
 
 # MAGIC %md
 # MAGIC 
+# MAGIC - We can upload our data using the 'Data' tab UI.
+# MAGIC - A more realistic example would be to connect Databricks to an exsiting data store (Such as Azure Storage)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC 
 # MAGIC ## Mounting Blob Storage
 
 # COMMAND ----------
@@ -14,9 +21,9 @@
 # mount the storage here
 try:
   dbutils.fs.mount(
-    source = "wasbs://dailyactivities@velidastorage.blob.core.windows.net",
-    mount_point = "/mnt/dailyexercisefiles",
-    extra_configs = {"fs.azure.account.key.velidastorage.blob.core.windows.net":dbutils.secrets.get(scope="azurekeyvault", key="storagekeysecret")}
+    source = "wasbs://CONTAINERNAME@STORAGEACCOUNTNAME.blob.core.windows.net",
+    mount_point = "/mnt/MOUNTNAME",
+    extra_configs = {"fs.azure.account.key.CONTAINERNAME.blob.core.windows.net":dbutils.secrets.get(scope="azurekeyvault", key="storagekeysecret")}
   )
   print("Storage has been mounted!")
 except:
@@ -50,7 +57,7 @@ import datetime
 
 # MAGIC %md
 # MAGIC 
-# MAGIC ## Working with DBFS
+# MAGIC ## Working with DBFS (Databricks File System)
 
 # COMMAND ----------
 
@@ -58,6 +65,7 @@ import datetime
 # MAGIC 
 # MAGIC - A distributed file system installed on our clusters
 # MAGIC - Files persist to Blob Storage, so we don't lose our data after we terminate our clusters
+# MAGIC - We can access the DBFS via the Databricks CLI tool, DBFS API, Spark API's or Databricks Utilities library
 
 # COMMAND ----------
 
@@ -67,7 +75,7 @@ display(dbutils.fs.ls("dbfs:/mnt/dailyexercisefiles"))
 # COMMAND ----------
 
 # Make a directory in DBFS
-dbutils.fs.mkdirs("mnt/dailyexercisefiles/newFolder")
+dbutils.fs.mkdirs("mnt/dailyexercisefiles/newFolder2")
 
 # COMMAND ----------
 
@@ -112,12 +120,43 @@ CardioWorkoutsDF = spark.read.format("csv").option("header", "true").option("inf
 
 # COMMAND ----------
 
-# do some cool operations here
-display(dailyActivitiesDF)
+display(TotalExerciseDF)
+
+# COMMAND ----------
+
+display(FoodLogDF)
 
 # COMMAND ----------
 
 dailyActivitiesDF.printSchema()
+
+# COMMAND ----------
+
+FoodLogDF.printSchema()
+
+# COMMAND ----------
+
+# Join on date
+joinExpression = TotalExerciseDF["ExerciseDate"] == FoodLogDF["FoodLogDate"]
+
+ExerciseAndFoodDF = TotalExerciseDF.join(FoodLogDF, joinExpression)
+
+# Drop the Food Log Date
+ExerciseAndFoodDFv1 = ExerciseAndFoodDF.drop('FoodLogDate', 'MinutesSedentary', 'MinutesLightlyActive', 'MinutesFairlyActive', 'MinutesVeryActive', 'Fat', 'Fiber', 'Carbs', 'Sodium', 'Protein', 'Water')
+
+# Write the result to a table
+display(ExerciseAndFoodDFv1)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC 
+# MAGIC ## Tables
+# MAGIC 
+# MAGIC - In Databricks, we have both global and local tables
+# MAGIC - Global tables are available across all clusters and are registered to the Hive metastore
+# MAGIC - Local tables are only avaialble to that cluster and is not registered to the Hive metastore
+# MAGIC - We can create tables using the UI or programmatically as below
 
 # COMMAND ----------
 
@@ -174,15 +213,47 @@ dailyActivitiesDF.select(corr("CaloriesBurned", "Steps"),covar_samp("CaloriesBur
 
 # MAGIC %md
 # MAGIC 
+# MAGIC ## Multiple languages in one notebook
+# MAGIC 
+# MAGIC - One cool thing about Databricks is that we can combine languages within a notebook
+# MAGIC - So one example of this could be that our Data Scientists are comfortable writing Python, then our Data Engineers optimise that using Scala
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC 
+# MAGIC SELECT Count(Date) as NumberOfDaysCaloriesBurnedOver4000
+# MAGIC FROM dailyActivities_2019
+# MAGIC WHERE CaloriesBurned >= 4000
+
+# COMMAND ----------
+
+# MAGIC %scala
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC 
+# MAGIC SELECT Date, CaloriesBurned, Steps, ActivityCalories
+# MAGIC FROM dailyActivities_2019
+# MAGIC WHERE CaloriesBurned >= 4000
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC 
 # MAGIC ## Writing our data to Cosmos DB
+# MAGIC 
+# MAGIC - We can write to a variety of different data sources, provided we've set up the necessary libraries and infrastructure to do so
+# MAGIC - Slightly naughty here, should encrypt secrets with Azure Vault Key or Databricks Secrets
 
 # COMMAND ----------
 
 writeConfig = {
- "Endpoint" : "https://velidacosmos.documents.azure.com:443/",
- "Masterkey" : "l6dNkRelDRofvYmFwDdzRz747fYAVmp3g4sohwTv0PKacdQZZQbNYLvgsfWk85bygGNrr3T251BDgRkMORSieg==",
- "Database" : "DailyActivities",
- "Collection" : "Activities",
+ "Endpoint" : "COSMOSENDPOINT",
+ "Masterkey" : "PRIMARYKEY",
+ "Database" : "DATABASENAME",
+ "Collection" : "COLLECTIONNAME",
  "Upsert" : "true"
 }
 
@@ -190,3 +261,10 @@ dailyActivitiesDF.write.format("com.microsoft.azure.cosmosdb.spark").options(**w
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC 
+# MAGIC ## Unmounting our storage account
+
+# COMMAND ----------
+
+dbutils.fs.unmount("/mnt/dailyexercisefiles")
