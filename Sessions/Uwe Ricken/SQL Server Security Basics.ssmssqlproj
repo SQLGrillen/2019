@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SQL Server Security Basics">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="NB-LENOVO-I\SQL_2016:NB-LENOVO-I\Uwe">
+          <Created>2017-05-02T13:55:02.237816+02:00</Created>
+          <Type>SQL</Type>
+          <Server>NB-LENOVO-I\SQL_2016</Server>
+          <UserName />
+          <Authentication>Windows Authentication</Authentication>
+          <InitialDB>demo_db</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="0010 - create database and relations.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NB-LENOVO-I\SQL_2016:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NB-LENOVO-I\SQL_2016</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>0010 - create database and relations.sql</FullPath>
+        </FileNode>
+        <FileNode Name="0020 - Security for Microsoft SQL Server.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NB-LENOVO-I\SQL_2016:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NB-LENOVO-I\SQL_2016</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>0020 - Security for Microsoft SQL Server.sql</FullPath>
+        </FileNode>
+        <FileNode Name="0030 - Server Roles in Microsoft SQL Server.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NB-LENOVO-I\SQL_2016:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NB-LENOVO-I\SQL_2016</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>0030 - Server Roles in Microsoft SQL Server.sql</FullPath>
+        </FileNode>
+        <FileNode Name="0040 - Creation of database users.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NB-LENOVO-I\SQL_2016:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NB-LENOVO-I\SQL_2016</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>0040 - Creation of database users.sql</FullPath>
+        </FileNode>
+        <FileNode Name="0050 - Schemata in Database.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NB-LENOVO-I\SQL_2016:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NB-LENOVO-I\SQL_2016</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>0050 - Schemata in Database.sql</FullPath>
+        </FileNode>
+        <FileNode Name="0060 - Play around in our new appartment.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NB-LENOVO-I\SQL_2016:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NB-LENOVO-I\SQL_2016</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>0060 - Play around in our new appartment.sql</FullPath>
+        </FileNode>
+        <FileNode Name="0070 - grant privileges to the family.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:NB-LENOVO-I\SQL_2016:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>NB-LENOVO-I\SQL_2016</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>0070 - grant privileges to the family.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items>
+        <FileNode Name="SQL Server Security - DE.pptx">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>SQL Server Security - DE.pptx</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>
