@@ -1,0 +1,1 @@
+"%programfiles%\workloadtools\WorkloadViewer" --BaselineServer (local)\SQL2016 --BaselineDatabase SqlWorkload03 --BaselineSchema capture --BenchmarkServer (local)\SQL2016 --BenchmarkDatabase SqlWorkload03 --BenchmarkSchema replay

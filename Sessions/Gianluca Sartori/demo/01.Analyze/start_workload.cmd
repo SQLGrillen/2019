@@ -1,0 +1,1 @@
+start "" "D:\DVDSTORE\driver_lite.cmd"

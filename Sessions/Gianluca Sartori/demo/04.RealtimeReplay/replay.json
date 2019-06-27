@@ -1,0 +1,43 @@
+{
+    "Controller": {
+
+        "Listener":
+        {
+            "__type": "ExtendedEventsWorkloadListener",
+            "ConnectionInfo":
+            {
+                "ServerName": "SQLDEMO\\SQL2014",
+                "DatabaseName": "master",
+                "UserName": "sa",
+                "Password": "P4$$w0rd!"
+            },
+            "DatabaseFilter": "DS3"
+        },
+
+        "Consumers":
+        [
+            {
+                "__type": "ReplayConsumer",
+                "ConnectionInfo": 
+                {
+                    "ServerName": "spaghettidba.database.windows.net",
+                    "DatabaseName": "DS3",
+                    "UserName": "spaghettidba",
+                    "Password": "password"
+                }
+            },
+            {
+                "__type": "AnalysisConsumer",
+                "ConnectionInfo": 
+                {
+                    "ServerName": "SQLDEMO\\SQL2016",
+                    "DatabaseName": "SqlWorkload04",
+                    "SchemaName": "capture",
+                    "UserName": "sa",
+                    "Password": "P4$$w0rd!"
+                },
+                "UploadIntervalSeconds": 60
+            }
+        ]
+    }
+}

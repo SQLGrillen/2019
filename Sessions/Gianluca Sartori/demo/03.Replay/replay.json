@@ -1,0 +1,37 @@
+{
+    "Controller": {
+
+        "Listener":
+        {
+            "__type": "FileWorkloadListener",
+            "Source": "C:\\demo\\CloudConfItalia2018\\02.Capture\\SqlWorkload.sqlite",
+            "SynchronizationMode": "true"
+        },
+
+        "Consumers":
+        [
+            {
+                "__type": "ReplayConsumer",
+                "ConnectionInfo": 
+                {
+                    "ServerName": "spaghettidba.database.windows.net",
+                    "DatabaseName": "DS3",
+                    "UserName": "spaghettidba",
+                    "Password": "password"
+                }
+            },
+            {
+                "__type": "AnalysisConsumer",
+                "ConnectionInfo": 
+                {
+                    "ServerName": "SQLDEMO\\SQL2016",
+                    "DatabaseName": "SqlWorkload03",
+                    "SchemaName": "capture",
+                    "UserName": "sa",
+                    "Password": "P4$$w0rd!"
+                },
+                "UploadIntervalSeconds": 60
+            }
+        ]
+    }
+}

@@ -1,0 +1,1 @@
+"%programfiles%\workloadtools\WorkloadViewer" --BaselineServer (local)\SQL2016 --BaselineDatabase SqlWorkload02 --BaselineSchema capture 

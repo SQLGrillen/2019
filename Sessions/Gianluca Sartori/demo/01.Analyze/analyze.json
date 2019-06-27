@@ -1,0 +1,33 @@
+{
+    "Controller": {
+
+        "Listener":
+        {
+            "__type": "ExtendedEventsWorkloadListener",
+            "ConnectionInfo":
+            {
+                "ServerName": "SQLDEMO\\SQL2014",
+                "DatabaseName": "master",
+                "UserName": "sa",
+                "Password": "P4$$w0rd!"
+            },
+            "DatabaseFilter": "DS3"
+        },
+
+        "Consumers":
+        [
+            {
+                "__type": "AnalysisConsumer",
+                "ConnectionInfo": 
+                {
+                    "ServerName": "SQLDEMO\\SQL2016",
+                    "DatabaseName": "SqlWorkload01",
+                    "SchemaName": "capture",
+                    "UserName": "sa",
+                    "Password": "P4$$w0rd!"
+                },
+                "UploadIntervalSeconds": 60
+            }
+        ]
+    }
+}
