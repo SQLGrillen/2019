@@ -40,8 +40,8 @@ break
         $workspacename = $workspace.name
 
         #Create path for workspace if it doesnt exist
-        if(!(Test-Path -path "C:\Users\Craig.Porteous\OneDrive - Incremental Group Ltd\PowerBI_Backups\$($workspacename)")){
-            New-Item -ItemType Directory -Path "C:\Users\Craig.Porteous\OneDrive - Incremental Group Ltd\PowerBI_Backups\$($workspacename)"
+        if(!(Test-Path -path "C:\PowerBI_Backups\$($workspacename)")){
+            New-Item -ItemType Directory -Path "C:\PowerBI_Backups\$($workspacename)"
         }
 
         $reporturi = "https://api.powerbi.com/v1.0/myorg/groups/$($workspaceid)/reports"
@@ -54,9 +54,8 @@ break
    
             $exporturi = "https://api.powerbi.com/v1.0/myorg/groups/$($workspaceid)/reports/$($reportid)/Export"
             
-            Invoke-RestMethod -Uri $exporturi -Headers $authHeader -Method GET | Out-File -Force -FilePath "C:\Users\Craig.Porteous\OneDrive - Incremental Group Ltd\PowerBI_Backups\$($workspacename)\$($reportname).pbix"
+            Invoke-RestMethod -Uri $exporturi -Headers $authHeader -Method GET | Out-File -Force -FilePath "C:\PowerBI_Backups\$($workspacename)\$($reportname).pbix"
         }        
     }
 
-
-    # Start-Process "C:\PowerBI_Backups"
+    Start-Process "C:\PowerBI_Backups"
